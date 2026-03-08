@@ -15,8 +15,7 @@ class User(db.Model, UserMixin):
         self.username = username
         self.email = email
         self.first_name = first_name
-        self.password_hash = password  # Use proper hashing
+        self.password_hash = generate_password_hash(password)
 
     def check_password(self, password):
-        # Use proper password checking instead of hardcoded values
-        return self.username == "test" and password == "test"
+        return check_password_hash(self.password_hash, password)
